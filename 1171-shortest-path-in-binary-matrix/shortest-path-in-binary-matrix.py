@@ -4,12 +4,12 @@ class Solution:
         if grid[0][0]==1 or grid[n-1][n-1]==1:
             return -1
         path=[[-1,-1],[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1]]
-        queue=[[0,0,1]]
-        visited=[[float("inf")] * n for _ in range(n)]
-        visited[0][0]=1
+        queue=deque([(0,0,1)])
+        # visited=[[float("inf")] * n for _ in range(n)]
+        grid[0][0]=1
         # print(visited)
         while queue:
-            row,col,count=queue.pop(0)
+            row,col,count=queue.popleft()
             if row==n-1 and col==n-1:
                 return count
             for i,j in path:
@@ -17,9 +17,9 @@ class Solution:
                 ncol=col+j
                 if 0<=nrow<n and 0<=ncol<n:
                     # print(nrow,ncol)
-                    if (grid[nrow][ncol]==0) and (visited[nrow][ncol]>count+1):
+                    if (grid[nrow][ncol]==0):
                         queue.append([nrow,ncol,count+1])
-                        visited[nrow][ncol]=count+1
+                        grid[nrow][ncol]=1
         return -1
 
         

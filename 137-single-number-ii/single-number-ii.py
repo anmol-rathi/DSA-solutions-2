@@ -1,19 +1,28 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
+        ones=0
+        twos=0
         n=len(nums)
-        res=0
-        for bits in range(32):
-            count=0
-            for i in nums:
-                if i<0:
-                    i=i& (2**32 -1)
-                if i&(1<<bits):
-                    count+=1
-            if count%3!=0:
-                res=res|(1<<bits)
-        if res>=2**31:
-            res-=2**32
-        return res
+        for i in range(n):
+            ones=(ones^nums[i]) & ~twos
+            twos=(twos^nums[i]) & ~ones
+        return ones
+
+
+        # n=len(nums)
+        # res=0
+        # for bits in range(32):
+        #     count=0
+        #     for i in nums:
+        #         if i<0:
+        #             i=i& (2**32 -1)
+        #         if i&(1<<bits):
+        #             count+=1
+        #     if count%3!=0:
+        #         res=res|(1<<bits)
+        # if res>=2**31:
+        #     res-=2**32
+        # return res
 
                 
 

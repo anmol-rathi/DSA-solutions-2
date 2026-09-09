@@ -12,7 +12,7 @@ class Solution:
                 num+=1
         res=0
         speedmin=speed[n-1]
-        print(position,speed)
+        # print(position,speed)
         for i in range(n-1,-1,-1):
             if i-1>=0:
                 if speed[i-1]>speedmin:

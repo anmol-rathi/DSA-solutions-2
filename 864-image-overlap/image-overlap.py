@@ -11,6 +11,8 @@ class Solution:
                     arr2.append([i,j])
         
         h={}
+        if not arr1 or not arr2:
+            return 0
         for row,col in arr1:
             for row2,col2 in arr2:
                 drow=row2-row
@@ -19,6 +21,6 @@ class Solution:
                     h[(drow,dcol)]=1
                 else:
                     h[(drow,dcol)]+=1
-        return max(h.values() or [0])
+        return max(h.values())
 
         

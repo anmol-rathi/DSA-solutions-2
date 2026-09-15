@@ -3,17 +3,18 @@ class Solution:
         s=sum(nums)
         if s%2==1:
             return False
-        dp=[[-1]*((s//2)+1) for _ in range(len(nums)) ]
+        target=s//2
+        dp=[[-1]*(target+1) for _ in range(len(nums)) ]
         def f(i,sum):
-            if sum==s/2:
+            if sum==target:
                 return True
             if i==0:
-                return False
+                return sum + nums[0] == target
             if dp[i][sum]!=-1:
                 return dp[i][sum]
             nottake=f(i-1,sum)
             take=False
-            if sum+nums[i]<=s/2:
+            if sum+nums[i]<=target:
                 take=f(i-1,sum+nums[i])
             dp[i][sum]=take or nottake
             return take or nottake

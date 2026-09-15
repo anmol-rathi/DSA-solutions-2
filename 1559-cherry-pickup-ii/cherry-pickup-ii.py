@@ -3,7 +3,6 @@ class Solution:
         n=len(grid)
         m=len(grid[0])
         dp=[[[-1]*m for _ in range(m)] for j in range(n)]
-        print(dp)
         def f(i,j1,j2):
             if j1<0 or j1>=m or j2<0 or j2>=m:
                 return float('-inf')

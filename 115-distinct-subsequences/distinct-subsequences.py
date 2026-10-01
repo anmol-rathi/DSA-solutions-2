@@ -1,38 +1,21 @@
 class Solution:
     def numDistinct(self, s: str, t: str) -> int:
-        m, n = len(s), len(t)
-        if m < n:
-            return 0
-        
-        dp = [[0] * (n + 1) for _ in range(m + 1)]
-        for i in range(m + 1):
-            dp[i][n] = 1
-        
-        for i in range(m - 1, -1, -1):
-            for j in range(n - 1, -1, -1):
-                if s[i] == t[j]:
-                    dp[i][j] = dp[i + 1][j + 1] + dp[i + 1][j]
+        n=len(s)
+        m=len(t)
+        dp=[[-1]*m for _ in range(n)]
+        def f(i,j):
+            if i<0 or j<0:
+                return 0
+            if dp[i][j]!=-1:
+                return dp[i][j]
+            nottake=f(i-1,j)
+            take=0
+            if s[i]==t[j]:
+                if j==0:
+                    # print(i,j)
+                    take = 1
                 else:
-                    dp[i][j] = dp[i + 1][j]
-        
-        return dp[0][0]
-        # res=0
-        # def same(subs,i):
-        #     nonlocal res
-        #     if len(subs)==len(t):
-        #         if subs==t:
-        #             res+=1
-        #         return
-        #     if i>=len(s):
-        #         return
-        #     n=len(subs)
-        #     if subs == t[:n]:
-                
-        #         same(subs+s[i],i+1)
-                
-        #         same(subs,i+1)
-        # same('',0)
-        # # print(res)
-        # return res
-
-        
+                    take= f(i-1,j-1)
+            dp[i][j]=take+nottake
+            return dp[i][j]
+        return f(len(s)-1,len(t)-1)        

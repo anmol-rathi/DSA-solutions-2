@@ -21,8 +21,7 @@ class Solution:
         maxi=1
         for i in range(n):
             for j in range(i):
-                if compare(words[i], words[j]):
-                    if dp[i]<1+dp[j]:
-                        dp[i]=1+dp[j]
+                if dp[i]<1+dp[j] and compare(words[i], words[j]):
+                    dp[i]=1+dp[j]
             maxi=max(maxi,dp[i])
         return maxi
